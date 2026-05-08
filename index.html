@@ -79,7 +79,6 @@
             padding: 20px;
         }
 
-        /* GENERADOR MÁGICO */
         .generator-card {
             background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
             border: 1px solid rgba(255,255,255,0.1);
@@ -90,17 +89,6 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
-        }
-
-        .generator-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,126,95,0.05) 0%, transparent 70%);
-            pointer-events: none;
         }
 
         #nick-display {
@@ -133,10 +121,9 @@
             box-shadow: 0 20px 40px rgba(255, 126, 95, 0.5);
         }
 
-        /* GRID DE SECCIONES */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             margin-top: 20px;
         }
@@ -198,7 +185,6 @@
             margin-top: 40px;
         }
 
-        /* Animación de entrada */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -220,6 +206,7 @@
     <a href="index.html">Inicio</a>
     <a href="valorant.html">Valorant</a>
     <a href="brawl.html">Brawl Stars</a>
+    <a href="roblox.html">Roblox</a>
     <a href="discord.html">Discord</a>
     <a href="clanes.html">Clanes</a>
 </nav>
@@ -242,6 +229,12 @@
             <h3>Brawl Stars</h3>
             <p>Destaca en el Showdown con nombres originales.</p>
             <a href="brawl.html" class="btn-link">Ver más</a>
+        </div>
+
+        <div class="card">
+            <h3>Roblox</h3>
+            <p>Nombres únicos para Blox Fruits, Brookhaven y más.</p>
+            <a href="roblox.html" class="btn-link">Ver más</a>
         </div>
 
         <div class="card">
