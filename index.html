@@ -3,26 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EliteNicks | Los mejores nombres para juegos</title>
+    <title>EliteNicks | Generador de Nombres Legendarios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
-        header { background: #2c3e50; color: white; padding: 1rem; text-align: center; }
-        nav { background: #34495e; padding: 0.5rem; text-align: center; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        .container { max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h1 { color: #e67e22; }
-        h2 { color: #2c3e50; }
-        .game-section { margin-bottom: 30px; padding: 15px; border-bottom: 1px solid #eee; }
-        .btn { display: inline-block; background: #e67e22; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; margin-top: 10px; font-weight: bold; }
-        .btn:hover { background: #d35400; }
-        footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #777; }
+        :root {
+            --primary: #ff7e5f;
+            --secondary: #feb47b;
+            --dark: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top, #1e293b, #0f172a);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 4rem 1rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 800;
+        }
+
+        header p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        nav {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            z-index: 1000;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            margin: 0 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* GENERADOR MÁGICO */
+        .generator-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 50px 20px;
+            text-align: center;
+            margin-bottom: 60px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generator-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,126,95,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        #nick-display {
+            font-size: clamp(2rem, 10vw, 3.5rem);
+            font-weight: 800;
+            display: block;
+            margin: 25px 0;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255, 126, 95, 0.4);
+            min-height: 80px;
+            transition: opacity 0.2s;
+        }
+
+        .gen-btn {
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 800;
+            text-transform: uppercase;
+            transition: 0.4s;
+            box-shadow: 0 10px 20px rgba(255, 126, 95, 0.3);
+        }
+
+        .gen-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 126, 95, 0.5);
+        }
+
+        /* GRID DE SECCIONES */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 35px 25px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--primary);
+            transform: translateY(-12px);
+        }
+
+        .card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .btn-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 2px solid var(--primary);
+            padding: 10px 25px;
+            border-radius: 12px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: #475569;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 40px;
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            animation: fadeInUp 0.8s ease-out;
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>EliteNicks</h1>
-    <p>Domina el servidor con el mejor nombre</p>
+    <p>Tu Identidad Gamer Empieza Aquí</p>
 </header>
 
 <nav>
@@ -30,38 +221,64 @@
     <a href="valorant.html">Valorant</a>
     <a href="brawl.html">Brawl Stars</a>
     <a href="discord.html">Discord</a>
+    <a href="clanes.html">Clanes</a>
 </nav>
 
 <div class="container">
-    <h2>Bienvenido a EliteNicks</h2>
-    <p>Aquí encontrarás las listas más completas de nicknames para tus juegos favoritos. No seas un jugador genérico, elige un nombre que imponga respeto.</p>
-    
-    <div class="game-section" id="valorant">
-        <h3>Nombres para Valorant</h3>
-        <p>Explora nuestra selección de nombres aesthetic y competitivos para Valorant.</p>
-        <a href="valorant.html" class="btn">Ver nombres de Valorant</a>
+    <div class="generator-card">
+        <h3 style="margin:0; color: var(--text-dim); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;">⚡ Generador Instantáneo</h3>
+        <span id="nick-display">---</span>
+        <button class="gen-btn" onclick="generateNick()">¡Generar Nick!</button>
     </div>
 
-    <div class="game-section" id="brawl">
-        <h3>Nombres para Brawl Stars</h3>
-        <p>Desde nombres con colores hasta símbolos épicos para tus Brawlers.</p>
-        <a href="brawl.html" class="btn">Ver nombres de Brawl Stars</a>
-    </div>
+    <div class="grid">
+        <div class="card">
+            <h3>Valorant</h3>
+            <p>Nicks competitivos y aesthetic para tu Riot ID.</p>
+            <a href="valorant.html" class="btn-link">Ver más</a>
+        </div>
 
-    <div class="game-section" id="discord">
-        <h3>Nombres para Discord</h3>
-        <p>Nombres únicos para tu perfil y las mejores ideas para tus servidores.</p>
-        <a href="discord.html" class="btn">Ver nombres de Discord</a>
+        <div class="card">
+            <h3>Brawl Stars</h3>
+            <p>Destaca en el Showdown con nombres originales.</p>
+            <a href="brawl.html" class="btn-link">Ver más</a>
+        </div>
+
+        <div class="card">
+            <h3>Discord</h3>
+            <p>Ideas únicas para tu perfil y tus servidores.</p>
+            <a href="discord.html" class="btn-link">Ver más</a>
+        </div>
+
+        <div class="card">
+            <h3>Clanes</h3>
+            <p>Nombres que imponen respeto para tu squad.</p>
+            <a href="clanes.html" class="btn-link">Ver más</a>
+        </div>
     </div>
 </div>
-<div class="game-section">
-        <h3>Nombres para Clanes</h3>
-        <p>Encuentra el nombre perfecto para tu equipo o escuadrón competitivo.</p>
-        <a href="clanes.html" class="btn">Ver nombres de Clanes</a>
-    </div>
+
 <footer>
-    &copy; 2026 EliteNicks - Tu identidad gamer empieza aquí.
+    &copy; 2026 EliteNicks | La forja de nombres para la nueva era gamer.
 </footer>
+
+<script>
+    function generateNick() {
+        const pre = ["Shadow", "Vortex", "Rage", "Neon", "Cyber", "Void", "Zen", "Kraken", "Titan", "Spectral", "Nova", "Abyss"];
+        const post = ["Hunter", "Viper", "Soul", "Edge", "Storm", "Wolf", "King", "Ghost", "Zero", "Strike"];
+        const randomPre = pre[Math.floor(Math.random() * pre.length)];
+        const randomPost = post[Math.floor(Math.random() * post.length)];
+        const num = Math.floor(Math.random() * 99);
+        
+        const display = document.getElementById('nick-display');
+        display.style.opacity = '0';
+        
+        setTimeout(() => {
+            display.innerText = randomPre + randomPost + num;
+            display.style.opacity = '1';
+        }, 150);
+    }
+</script>
 
 </body>
 </html>
